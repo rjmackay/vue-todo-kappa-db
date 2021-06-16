@@ -38,8 +38,8 @@ export default async (store) => {
       if (type === "receiveData") {
         return;
       }
-      const todoId = todo.id;
-      todo = state.todos.find((t) => t.id === todoId) || todo;
+      const todoKey = todo.key;
+      todo = state.todos.find((t) => t.key === todoKey) || todo;
       feed.append({
         type: type === "removeTodo" ? "del" : "put",
         timestamp: new Date().toISOString(),
@@ -55,37 +55,20 @@ export default async (store) => {
         "receiveData",
         data.map(({ key, value }) => {
           return {
-            id: key,
+            key,
             ...value,
           };
         })
       );
     });
-    // // Listen for latest message.
-    core.api.kv.on("update", (k, v) => {
-      console.log(k, v);
-    });
-    core.api.kv.on("batch", (ops) => {
-      console.log(ops);
+    // Listen for latest message.
+    core.api.kv.on("batch", () => {
       core.api.kv.all((data) => {
         store.commit(
           "receiveData",
           data.map(({ key, value }) => {
             return {
-              id: key,
-              ...value,
-            };
-          })
-        );
-      });
-    });
-    core.api.kv.on("del", () => {
-      core.api.kv.all((data) => {
-        store.commit(
-          "receiveData",
-          data.map(({ key, value }) => {
-            return {
-              id: key,
+              key,
               ...value,
             };
           })
