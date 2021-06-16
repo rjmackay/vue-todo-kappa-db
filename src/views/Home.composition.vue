@@ -37,7 +37,7 @@
         </ul>
       </nav>
     </li>
-    <TodoItem v-for="todo in filteredTodos" :key="todo.id" :todo="todo" />
+    <TodoItem v-for="todo in filteredTodos" :key="todo.key" :todo="todo" />
   </ul>
   <button
     type="button"

@@ -36,7 +36,7 @@ const actions = {
   addTodo({ commit }, text) {
     commit("addTodo", {
       todo: {
-        id: Date.now(),
+        key: Date.now().toString(),
         text,
         done: false,
       },

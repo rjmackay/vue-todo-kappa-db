@@ -6,11 +6,11 @@ const makeKvView = (storage) => {
       map: function (entries, next) {
         const batch = entries
           .map(function (entry) {
-            const { id, type, ...value } = entry.value;
+            const { key, type, ...value } = entry.value;
             return {
               type: type === "del" ? "del" : "put",
-              key: id,
-              value: value,
+              key,
+              value,
             };
           })
           .filter(({ key }) => !!key);
