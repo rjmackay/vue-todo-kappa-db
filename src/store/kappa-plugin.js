@@ -20,7 +20,9 @@ export default async (store) => {
   const topic = Buffer.from(
     await crypto.subtle.digest("SHA-256", ArrayBufferFromString(STORAGE_KEY))
   );
-  const swarm = hyperswarm(/* { bootstrap: ['ws://192.168.29.7:4977'], } */);
+  const swarm = hyperswarm({
+    bootstrap: ["ws://localhost:4977", "ws://192.168.20.7:4977"],
+  });
   window.swarm = swarm;
   const core = kappa(rai(STORAGE_KEY + "-kappa"), {
     valueEncoding: "json",
