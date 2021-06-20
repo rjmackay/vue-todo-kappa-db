@@ -4,6 +4,7 @@ import hyperswarm from "hyperswarm-web";
 import pump from "pump";
 import level from "level";
 import kvView from "../kappa-kv-view";
+import HLC from "@consento/hlc";
 
 const STORAGE_KEY = "vue-todo-pwa";
 
@@ -17,6 +18,7 @@ function ArrayBufferFromString(str) {
 }
 
 export default async (store) => {
+  const clock = new HLC();
   const topic = Buffer.from(
     await crypto.subtle.digest("SHA-256", ArrayBufferFromString(STORAGE_KEY))
   );
@@ -43,8 +45,9 @@ export default async (store) => {
       const todoKey = todo.key;
       todo = state.todos.find((t) => t.key === todoKey) || todo;
       feed.append({
-        type: type === "removeTodo" ? "del" : "put",
         ...todo,
+        type: type === "removeTodo" ? "del" : "put",
+        ts: clock.now().toJSON(),
       });
     });
   });
@@ -54,10 +57,11 @@ export default async (store) => {
     core.api.kv.all((data) => {
       store.commit(
         "receiveData",
-        data.map(({ key, value }) => {
+        data.map(({ key, value: { text, done } }) => {
           return {
             key,
-            ...value,
+            text,
+            done,
           };
         })
       );
@@ -67,10 +71,11 @@ export default async (store) => {
       core.api.kv.all((data) => {
         store.commit(
           "receiveData",
-          data.map(({ key, value }) => {
+          data.map(({ key, value: { text, done } }) => {
             return {
               key,
-              ...value,
+              text,
+              done,
             };
           })
         );

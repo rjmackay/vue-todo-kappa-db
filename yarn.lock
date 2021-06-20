@@ -903,6 +903,14 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
+"@consento/hlc@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@consento/hlc/-/hlc-2.1.0.tgz#bc819e7c4665eab7b3b1262844223e4a52af144a"
+  integrity sha512-hNk+H4vDENBzhZhxrKfUqeqOpKGkOxR6tTy9A69sEydgGVgib3Sjrwb3xGmSRAebUL4WDRvSHmB4ke5xxr1C1A==
+  dependencies:
+    bigint-time "^1.0.2"
+    longfn "^1.1.0"
+
 "@geut/discovery-swarm-webrtc@^4.0.1":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@geut/discovery-swarm-webrtc/-/discovery-swarm-webrtc-4.3.0.tgz#dc5e679ec08965fcb4b19f30b370f842599cb0e9"
@@ -2186,6 +2194,11 @@ big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
+
+bigint-time@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/bigint-time/-/bigint-time-1.0.2.tgz#ec36011d0f160369b6c9f780a2863387dcbe9b07"
+  integrity sha512-T6vpQLR9NL5WEKPv1f4KRvwrujEbq5dDsNvooSEi1hVsBX4UUYJXLRKjfG1YeukSp4QqWwcW80rj39XGO/G8/A==
 
 binary-extensions@^1.0.0:
   version "1.13.1"
@@ -6225,6 +6238,11 @@ loglevel@^1.6.8:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.7.1.tgz#005fde2f5e6e47068f935ff28573e125ef72f197"
   integrity sha512-Hesni4s5UkWkwCGJMQGAh71PaLUmKFM60dHvq0zi/vDhhrzuk+4GgNbTXJ12YYQJn6ZKBDNIjYcuQGKudvqrIw==
+
+longfn@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/longfn/-/longfn-1.2.0.tgz#ce966e1baaaf550891b829f830511c585cc3b9f5"
+  integrity sha512-NZVxOy7Cxf7wb5lU8EQtxO9psA1BuCAbnukRDzYAJJUKv2AN+Flp+pddW0cnxZ8vjotR8db3as4rgUUHI/yd6g==
 
 lower-case@^1.1.1:
   version "1.1.4"

@@ -9,6 +9,7 @@
     "hyperswarm": "hyperswarm-web"
   },
   "dependencies": {
+    "@consento/hlc": "^2.1.0",
     "bootstrap": "^5.0.0-beta3",
     "buffer": "^6.0.3",
     "core-js": "^3.6.5",
