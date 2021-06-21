@@ -1,26 +1,18 @@
 import { createStore } from "vuex";
-
-const STORAGE_KEY = "vue-todo-pwa";
-
-const defaultTodos = [
-  { id: 1, text: "Learn JavaScript", done: true },
-  { id: 2, text: "Learn Vue 3", done: true },
-  { id: 3, text: "Learn Bootstrap 5", done: false },
-  { id: 4, text: "Build something awesome!", done: false },
-];
+import kappaPlugin from "./kappa-plugin";
 
 // initial state
 const state = {
-  todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY)) || defaultTodos,
+  todos: [],
 };
 
 // mutations
 const mutations = {
-  addTodo(state, todo) {
+  addTodo(state, { todo }) {
     state.todos.push(todo);
   },
 
-  removeTodo(state, todo) {
+  removeTodo(state, { todo }) {
     state.todos.splice(state.todos.indexOf(todo), 1);
   },
 
@@ -33,20 +25,26 @@ const mutations = {
       done,
     });
   },
+
+  receiveData(state, data) {
+    state.todos.splice(0, state.todos.length, ...data);
+  },
 };
 
 // actions
 const actions = {
   addTodo({ commit }, text) {
     commit("addTodo", {
-      id: Date.now(),
-      text,
-      done: false,
+      todo: {
+        key: Date.now().toString(),
+        text,
+        done: false,
+      },
     });
   },
 
   removeTodo({ commit }, todo) {
-    commit("removeTodo", todo);
+    commit("removeTodo", { todo });
   },
 
   toggleTodo({ commit }, todo) {
@@ -67,19 +65,13 @@ const actions = {
     state.todos
       .filter((todo) => todo.done)
       .forEach((todo) => {
-        commit("removeTodo", todo);
+        commit("removeTodo", { todo });
       });
   },
 };
 
 // plugins
-const plugins = [
-  (store) => {
-    store.subscribe((mutation, { todos }) => {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-    });
-  },
-];
+const plugins = [kappaPlugin];
 
 export default createStore({
   state,
